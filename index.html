@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--meta:vp-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>凤凰新闻</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .focus .swiper-container-horizontal > .focus .swiper-pagination-bullets, .swiper-pagination-custom, .focus .swiper-pagination-fraction {
+            color: #b0acab;
+            left: auto;
+            right: .2rem;
+            text-align: right;
+            font-size: .2rem;
+        }
+
+        .focus .swiper-pagination-current {
+            color: #f54343;
+            font-size: .36rem;
+        }
+    </style>
+</head>
+<body>
+<!--header begin-->
+<header>
+    <h1 class="i-logo"><a href=""><img src="images/logo.png" alt=""></a></h1>
+</header>
+<!--header end-->
+
+<!--nav begin-->
+<nav>
+    <a class="i-link cur" href="#">头条</a>
+    <a class="i-link" href="#">视频</a>
+    <a class="i-link" href="#">财经</a>
+    <a class="i-link" href="#">凤凰号</a>
+    <a class="i-link" href="#">凤凰卫视</a>
+</nav>
+<!--nav end-->
+
+<!--focus begin-->
+<div class="focus">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide">
+                 <a href="#">
+                     <img src="images/banner01.png">
+                     <span class="txt">覅v会计科何苦很舒服的点击，看深刻的金额为看时间段为</span>
+                     <span class="bg"></span>
+                 </a>
+             </div>-->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!--focus end-->
+
+<!--main begin-->
+
+<div class="main">
+
+</div>
+<!--main end-->
+
+</body>
+</html>
+<script charset="utf-8" type="text/javascript" src="js/ejs.min.js"></script>
+<script charset="utf-8" type="text/template" id="focusTemplate">
+    <%$.each(focusTepData,function(index,item){%>
+    <div class="swiper-slide">
+        <a href="<%=item.link.weburl%>">
+            <img src="<%=item.thumbnail%>">
+            <span class="txt"><%=item.title%></span>
+            <span class="bg"></span>
+        </a>
+    </div>
+    <%})%>
+</script>
+<script charset="utf-8" type="text-template" id="itemTemplate">
+    <%$.each(itemTepData,function(index,item){%>
+        <%if(item.style.images){%>
+            <section class="itemPics">
+        <div class="i-title"><a href="<%item.link.weburl%>"><%=item.title%></a></div>
+        <div class="pics">
+            <a href="<%item.link.weburl%>">
+                <img src="<%=item.style.images[0]%>" alt="">
+                <img src="<%=item.style.images[1]%>" alt="">
+                <img src="<%=item.style.images[2]%>" alt="">
+            </a>
+        </div>
+        <div class="i-des">
+            <div class="i-info">
+                <div class="i-source"><%=item.source%></div>
+                <div class="i-time"><%=item.updateTime%></div>
+            </div>
+            <div class="i-num">
+                <span class="i-count"><%=item.commentsall%></span>
+                <span class="i-icon"></span>
+            </div>
+        </div>
+    </section>
+        <%}else if(item.type=='phvideo'){%>
+    <%<!--大图-->%>
+    <section class="itemPics">
+        <div class="i-title"><a href="<%=item.link.weburl%>"><%=item.title%></a></div>
+        <div class="bigPic">
+            <a href="<%=item.link.weburl%>">
+                <img src="<%=item.thumbnail%>" alt="">
+                <span class="play-bg"></span>
+                <span class="play-icon"></span>
+                <span class="play-time"></span>
+            </a>
+        </div>
+        <div class="i-des">
+            <div class="i-info">
+                <div class="i-source"><%=item.source%></div>
+                <div class="i-time"></div>
+            </div>
+            <div class="i-num">
+                <span class="i-count"><%=item.commentsall%></span>
+                <span class="i-icon"></span>
+            </div>
+        </div>
+    </section>
+        <%} else if(item.thumbnail){%>
+    <%<!--左图-->%>
+    <section class="item">
+        <div class="i-pic">
+            <a href="<%=item.link.weburl%>">
+                <img src="<%=item.thumbnail%>" alt="">
+            </a>
+        </div>
+        <%<!--右文-->%>
+        <div class="i-thumb">
+            <div class="i-title"><a href="<%=item.link.weburl%>"><%=item.title%></a></div>
+            <div class="i-des">
+                <div class="i-time"><%=item.updateTime%></div>
+                <div class="i-num">
+                    <span class="i-count"><%=item.commentsall%></span>
+                    <span class="i-icon"></span>
+                    <%if(item.style.attribute){%>
+                    <span class="i-label"><%=item.style.attribute%></span>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <%}else{%>
+    <%<!--纯文字-->%>
+    <section class="itemPics itemTxt">
+        <div class="i-title"><a href="<%=item.link.weburl%>"><%=item.title%></a></div>
+        <div class="i-des">
+            <div class="i-info">
+                <div class="i-source"><%=item.source%></div>
+                <div class="i-time"><%=item.updateTime%></div>
+            </div>
+            <div class="i-num">
+                <span class="i-count"><%=item.commentsall%></span>
+                <span class="i-icon"></span>
+            </div>
+        </div>
+    </section>
+        <%}%>
+    <%})%>
+
+
+
+
+
+</script>
+
+<script charset="utf-8" type="text/javascript" src="js/zepto.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/swiper.min.js"></script>
+<script charset="utf-8" type="text/javascript">
+    ~function (desW) {
+        var winW = document.documentElement.clientWidth,
+            ratio = winW / desW;
+        document.documentElement.style.fontSize = ratio * 100 + "px";
+    }(750);
+
+
+    function bindHtml(data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].type == "focus") {
+                var focusList = data[i].item;
+            } else {
+                var itemlist = data[i].item;
+            }
+        }
+        _focusData = focusList;
+        _itemData = itemlist;
+        //console.log(_itemData);
+        /*ejs.render*/
+
+        var focusHtml = $("#focusTemplate").html();
+        var result = ejs.render(focusHtml, {focusTepData: _focusData});
+        $(".swiper-wrapper").html(result);
+
+        var mySwiper = new Swiper(".swiper-container", {
+            loop: true,
+            autoplay: 2000,
+            pagination: ".swiper-pagination",
+            paginationType: "fraction"
+        });
+
+        /*main*/
+        var itemHtml = $("#itemTemplate").html();
+        var rest = ejs.render(itemHtml,{itemTepData:_itemData});
+        $(".main").html(rest);
+        //ejs.render(模板的HTML结构，{模板的数据：data})
+
+    }
+
+    $.ajax({
+        url: "http://api.iclient.ifeng.com/ClientNews?id=SYLB10,SYDT10&gv=5.4.0&os=ios&uid=8jWzrXDWQeep2Nw4AZYzmHxkbneHy4Fj&callback=jQuery191037427085312083364_1483258003039&_=1483258003040",
+        type: "get",
+        dataType: "jsonp",//服务器返回的数据类型
+        jsonp: "callback",
+        success: bindHtml
+    })
+
+</script>
